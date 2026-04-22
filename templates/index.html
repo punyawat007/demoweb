@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}หน้าแรก - ร้านพิซซ่า{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>🍕 เมนูพิซซ่า</h1>
+    <a href="{{ url_for('add') }}" class="btn btn-primary">+ เพิ่มสินค้า</a>
+</div>
+
+<div class="row">
+    {% for pizza in pizzas %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <img src="{{ pizza.image }}" class="card-img-top" alt="{{ pizza.name }}" style="height: 200px; object-fit: cover;">
+            <div class="card-body">
+                <h5 class="card-title">{{ pizza.name }}</h5>
+                <p class="card-text">
+                    <span class="badge bg-secondary">{{ pizza.category_name }}</span>
+                </p>
+                <p class="card-text">
+                    <strong>ราคา:</strong> <span class="price-tag">{{ pizza.price }} บาท</span>
+                </p>
+                <p class="card-text">
+                    <strong>สินค้าคงเหลือ:</strong> 
+                    <span class="{{ 'text-success' if pizza.stock > 10 else 'text-warning' if pizza.stock > 0 else 'text-danger' }}">
+                        {{ pizza.stock }} ชิ้น
+                    </span>
+                </p>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <a href="{{ url_for('edit', id=pizza.id) }}" class="btn btn-warning btn-sm">แก้ไข</a>
+                <a href="{{ url_for('delete', id=pizza.id) }}" class="btn btn-danger btn-sm" onclick="return confirm('ยืนยันการลบ?')">ลบ</a>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-12 text-center">
+        <p class="text-muted">ยังไม่มีสินค้า</p>
+        <a href="{{ url_for('add') }}" class="btn btn-primary">เพิ่มสินค้าชิ้นแรก</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

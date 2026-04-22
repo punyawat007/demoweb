@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}แก้ไขสินค้า - ร้านพิซซ่า{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-warning">
+                <h4 class="mb-0">✏️ แก้ไขสินค้า</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">ชื่อสินค้า</label>
+                        <input type="text" name="name" class="form-control" value="{{ pizza.name }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">ราคา (บาท)</label>
+                        <input type="number" name="price" class="form-control" step="0.01" min="0" value="{{ pizza.price }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">URL รูปภาพ</label>
+                        <input type="url" name="image" class="form-control" value="{{ pizza.image }}" placeholder="https://example.com/image.jpg">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">จำนวนสินค้า</label>
+                        <input type="number" name="stock" class="form-control" min="0" value="{{ pizza.stock }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">หมวดหมู่</label>
+                        <select name="category_id" class="form-select" required>
+                            {% for category in categories %}
+                            <option value="{{ category.id }}" {{ 'selected' if category.id == pizza.category_id else '' }}>
+                                {{ category.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-warning">อัปเดต</button>
+                        <a href="{{ url_for('index') }}" class="btn btn-secondary">ยกเลิก</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
