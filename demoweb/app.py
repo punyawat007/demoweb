@@ -10,7 +10,7 @@ app.static_folder = 'static'
 app.static_url_path = '/static'
 
 # Database file
-DB_NAME = 'pizza.db'
+DB_NAME = '/home/punyawat007/demoweb/demoweb/pizza.db'
 
 
 def get_db_connection():
