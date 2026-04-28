@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เพิ่มพิซซาใหม่ - Pizza Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            text-align: center;
+            color: #d35400;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        .submit-btn {
+            width: 100%;
+            background-color: #27ae60;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #229954;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 15px;
+            color: #3498db;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>🍕 เพิ่มพิซซาใหม่</h1>
+    
+    <div class="form-container">
+        <form method="POST">
+            <!-- ชื่อพิซซา -->
+            <div class="form-group">
+                <label for="name">ชื่อพิซซา:</label>
+                <input type="text" id="name" name="name" required placeholder="เช่น Margherita">
+            </div>
+            
+            <!-- ราคา -->
+            <div class="form-group">
+                <label for="price">ราคา (บาท):</label>
+                <input type="number" id="price" name="price" required min="0" step="1" placeholder="เช่น 150">
+            </div>
+            
+            <!-- รูปภาพ -->
+            <div class="form-group">
+                <label for="image">รูปภาพ:</label>
+                <input type="file" id="image" name="image" accept="image/*">
+            </div>
+            
+            <!-- สต็อก -->
+            <div class="form-group">
+                <label for="stock">จำนวนในสต็อก:</label>
+                <input type="number" id="stock" name="stock" required min="0" value="0" placeholder="เช่น 10">
+            </div>
+            
+            <!-- หมวดหมู่ -->
+            <div class="form-group">
+                <label for="category_id">หมวดหมู่:</label>
+                <select id="category_id" name="category_id" required>
+                    {% for cat in categories %}
+                    <option value="{{ cat.id }}">{{ cat.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <!-- ปุ่ม Submit -->
+            <button type="submit" class="submit-btn">เพิ่มพิซซา</button>
+        </form>
+        
+        <!-- ปุ่มกลับ -->
+        <a href="/" class="back-btn">← กลับไปหน้าหลัก</a>
+    </div>
+</body>
+</html>

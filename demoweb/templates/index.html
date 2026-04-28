@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask App</title>
+</head>
+<body>
+    <h1>Welcome to Flask</h1>
+    <p>This is a basic Flask application.</p>
+    <button onclick="fetchHello()">Test API</button>
+    <p id="response"></p>
+
+    <script>
+        async function fetchHello() {
+            const response = await fetch('/api/hello');
+            const data = await response.json();
+            document.getElementById('response').textContent = data.message;
+        }
+    </script>
+</body>
+</html>
